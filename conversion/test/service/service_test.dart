@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import '../api/utils/mock_response';
+import '../api/utils/mock_response.dart';
 import 'service_test.mocks.dart';
 
 @GenerateMocks([http.Client])
