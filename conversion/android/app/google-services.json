@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "566384678535",
+    "project_id": "conversion-c90ce",
+    "storage_bucket": "conversion-c90ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:566384678535:android:525ebf9d7ee18560da8a22",
+        "android_client_info": {
+          "package_name": "com.android.application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "566384678535-2umq5m8amfs4464hce75gnom2i9qdji5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCM7fzc5KdIuMOU5VmmrBuKoL7ha2uNU8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "566384678535-2umq5m8amfs4464hce75gnom2i9qdji5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

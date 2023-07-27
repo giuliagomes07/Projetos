@@ -25,10 +25,12 @@ class CustomFirebaseMessaging {
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
-      navigatorKey.currentState?.pushNamed(message.data['goTO']);
+      if (message.data['goTO'] != null) {
+        navigatorKey.currentState?.pushNamed(message.data['goTO']);
+      }
     });
   }
 
   getTokenFirebase() async =>
-      debugPrint((await FirebaseMessaging.instance.getToken) as String?);
+      debugPrint((FirebaseMessaging.instance.getToken) as String?);
 }
