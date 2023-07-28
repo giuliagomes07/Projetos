@@ -1,4 +1,5 @@
 import 'package:firebase_messaging_platform_interface/src/remote_notification.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class CustomLocalNotification {
@@ -39,18 +40,21 @@ class CustomLocalNotification {
     RemoteNotification notification,
     AndroidNotification android,
   ) {
-    flutterLocalNotificationsPlugin.show(
-      notification.hashCode,
-      notification.title,
-      notification.body,
-      NotificationDetails(
-        android: AndroidNotificationDetails(
-          channel.id,
-          channel.name,
-          channelDescription: channel.description,
-          icon: android.smallIcon,
-        ),
-      ),
-    );
+    if (flutterLocalNotificationsPlugin != null) {
+      flutterLocalNotificationsPlugin.show(
+        0,
+        notification.title,
+        notification.body,
+        const NotificationDetails(
+            android: AndroidNotificationDetails(
+          'default_notification_channel_id',
+          'default_notification_channel_id',
+          importance: Importance.high,
+          priority: Priority.max,
+          ticker: 'ticker',
+          color: Colors.red,
+        )),
+      );
+    }
   }
 }

@@ -1,7 +1,6 @@
 import 'package:atividade1/firebase_messaging/custom_local_notification.dart';
 import 'package:atividade1/main.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
 
 class CustomFirebaseMessaging {
   final CustomLocalNotification _customLocalNotification;
@@ -31,6 +30,5 @@ class CustomFirebaseMessaging {
     });
   }
 
-  getTokenFirebase() async =>
-      debugPrint((FirebaseMessaging.instance.getToken) as String?);
+  getTokenFirebase() async => FirebaseMessaging.instance.getToken();
 }

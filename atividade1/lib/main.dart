@@ -12,7 +12,6 @@ void main() async {
   await Firebase.initializeApp();
   await CustomFirebaseMessaging().inicialize();
 
-  CustomFirebaseMessaging().getTokenFirebase;
   await CustomRemoteConfig().initialize();
 
   runApp(const TarefaApp());

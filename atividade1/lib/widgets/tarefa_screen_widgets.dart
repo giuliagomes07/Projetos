@@ -1,6 +1,9 @@
+import 'package:atividade1/firebase_messaging/custom_firebase_messaging.dart';
 import 'package:atividade1/models/task_model.dart';
 import 'package:atividade1/widgets/add_widgets.dart';
 import 'package:atividade1/widgets/edit_screen_widgets.dart';
+import 'package:atividade1/widgets/hex_color.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -263,9 +266,7 @@ class TarefaScreenState extends State<TarefaScreen> {
               },
               style: ElevatedButton.styleFrom(
                 fixedSize: const Size(100, 40),
-                backgroundColor: task.isCompleted
-                    ? Colors.blue.withOpacity(0.5)
-                    : Colors.blue,
+                backgroundColor: task.isCompleted ? buttonColor : Colors.blue,
               ),
               child: Text(
                 task.isCompleted ? 'Desfazer' : 'Concluir',
@@ -282,8 +283,44 @@ class TarefaScreenState extends State<TarefaScreen> {
     );
   }
 
+  Future<String> fetchButtonColor() async {
+    final FirebaseRemoteConfig remoteConfig =
+        await FirebaseRemoteConfig.instance;
+
+    try {
+      await remoteConfig.setConfigSettings(RemoteConfigSettings(
+        fetchTimeout: const Duration(seconds: 10),
+        minimumFetchInterval: Duration.zero,
+      ));
+
+      await remoteConfig.fetchAndActivate();
+
+      return remoteConfig.getString('button_color');
+    } catch (e) {
+      print('Erro ao buscar o Remote Config: $e');
+      return "#0000FF";
+    }
+  }
+
+  Color buttonColor = Colors.red;
+  void fetchButtonColorFromRemoteConfig() async {
+    try {
+      String colorValue = await fetchButtonColor();
+      setState(() {
+        buttonColor = HexColor(colorValue);
+      });
+    } catch (e) {
+      print('Erro ao buscar o Remote Config: $e');
+      setState(() {
+        buttonColor = Colors.red;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    CustomFirebaseMessaging().getTokenFirebase().then((value) => print(value));
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
