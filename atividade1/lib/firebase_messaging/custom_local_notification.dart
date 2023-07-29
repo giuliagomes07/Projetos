@@ -42,7 +42,7 @@ class CustomLocalNotification {
   ) {
     if (flutterLocalNotificationsPlugin != null) {
       flutterLocalNotificationsPlugin.show(
-        0,
+        1,
         notification.title,
         notification.body,
         const NotificationDetails(

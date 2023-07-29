@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'home_widget.dart';
+
+
 
 class OnboardingScreen extends StatefulWidget {
-  const OnboardingScreen({super.key});
+  const OnboardingScreen({required Key key}) : super(key: key);
 
   @override
   OnboardingScreenState createState() => OnboardingScreenState();
@@ -44,33 +47,48 @@ class OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
-  Widget buildPage(String title, String description) {
-    return Padding(
-      padding: const EdgeInsets.all(40.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Center(
-            child: Image.asset('assets/fundo_imagens.png', height: 300),
-          ),
-          const SizedBox(height: 40),
-          Text(title,
-              style:
-                  const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-          const SizedBox(height: 16),
-          Text(description, style: const TextStyle(fontSize: 16)),
-        ],
+Widget buildPage(String title, String description) {
+  return Stack(
+    fit: StackFit.expand,
+    children: [
+      Image.asset('imagens/fundo.png', fit: BoxFit.cover),
+      Padding(
+        padding: const EdgeInsets.fromLTRB(40.0, 40.0, 40.0, 40.0), // Adjust top padding to move the content higher
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch, // Stretch text elements to full width
+          children: [
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              description,
+              style: const TextStyle(
+                fontSize: 16,
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
       ),
-    );
-  }
+    ],
+  );
+}
+
 
   Widget buildStartButton(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        // Navega para a tela Home (pode ser a tela de lista de veterinários).
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => widget),
+          MaterialPageRoute(
+            builder: (context) => MainContent(),
+          ),
         );
       },
       child: const Text('Começar'),
@@ -83,19 +101,13 @@ class OnboardingScreenState extends State<OnboardingScreen> {
       children: [
         TextButton(
           onPressed: () {
-            // Pula para a próxima página.
-            _pageController.nextPage(
-                duration: const Duration(milliseconds: 500),
-                curve: Curves.ease);
+            _pageController.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.ease);
           },
           child: const Text('Pular'),
         ),
         TextButton(
           onPressed: () {
-            // Navega para a próxima página.
-            _pageController.nextPage(
-                duration: const Duration(milliseconds: 500),
-                curve: Curves.ease);
+            _pageController.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.ease);
           },
           child: const Text('Próximo'),
         ),
