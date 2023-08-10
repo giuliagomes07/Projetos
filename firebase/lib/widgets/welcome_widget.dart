@@ -17,8 +17,7 @@ class WelcomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Padding(
-                padding: EdgeInsets.only(
-                    top: 30), // Ajuste o espaçamento superior do texto
+                padding: EdgeInsets.only(top: 30),
                 child: Text(
                   'Olá, seja bem vindo ao nosso',
                   style: TextStyle(
@@ -33,7 +32,7 @@ class WelcomeScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.black,
-                  fontFamily: 'Madani-Light', // Use a fonte 'Madani-Light'
+                  fontFamily: 'Madani-Light',
                 ),
               ),
               const SizedBox(height: 26),
@@ -47,15 +46,14 @@ class WelcomeScreen extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 226, 203, 230),
                     shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(10.0), // Borda arredondada
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
                   child: const Text(
                     'Entrar na minha Conta',
                     style: TextStyle(
                       color: Colors.purple,
-                      fontFamily: 'Madani-Light', // Use a fonte 'Madani-Light'
+                      fontFamily: 'Madani-Light',
                     ),
                   ),
                 ),
@@ -72,15 +70,14 @@ class WelcomeScreen extends StatelessWidget {
                     backgroundColor: Colors.white,
                     side: const BorderSide(color: Colors.purple),
                     shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(10.0), // Borda arredondada
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
                   child: const Text(
                     'Criar Conta',
                     style: TextStyle(
                       color: Colors.purple,
-                      fontFamily: 'Madani-Light', // Use a fonte 'Madani-Light'
+                      fontFamily: 'Madani-Light',
                     ),
                   ),
                 ),

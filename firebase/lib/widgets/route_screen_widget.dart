@@ -17,6 +17,7 @@ class Welcome extends StatelessWidget {
       create: (_) => AuthService(),
       child: MaterialApp(
         title: 'Flutter Firebase Auth',
+        debugShowCheckedModeBanner: false,
         initialRoute: '/welcome',
         routes: {
           '/welcome': (context) => const WelcomeScreen(),
