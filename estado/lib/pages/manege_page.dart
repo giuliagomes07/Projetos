@@ -157,6 +157,7 @@ class _ManageTypesScreenState extends State<ManageTypesScreen> {
                       }
                     },
                     controller: passwordController,
+                    obscureText: true,
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.all(10.0),
