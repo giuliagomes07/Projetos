@@ -15,6 +15,7 @@ class DrawerWidget extends StatelessWidget {
               Navigator.pushNamed(context, '/list-screen');
             },
           ),
+          const Divider(),
           ListTile(
             title: const Text('Gerenciar Tipos de Clientes'),
             onTap: () {
@@ -22,10 +23,15 @@ class DrawerWidget extends StatelessWidget {
               Navigator.pushNamed(context, '/manage-types');
             },
           ),
+          const Divider(),
           ListTile(
             title: const Text('Sair da conta'),
+            leading: const Icon(
+              Icons.exit_to_app,
+              color: Colors.green,
+            ),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.popUntil(context, ModalRoute.withName('/'));
             },
           ),
         ],

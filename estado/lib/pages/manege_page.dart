@@ -1,5 +1,5 @@
 import 'package:estado/models/custom_model.dart';
-import 'package:estado/pages/success_widgets.dart';
+import 'package:estado/pages/success_page.dart';
 import 'package:estado/util/util.dart';
 import 'package:estado/widgets/drawer_widget.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,10 @@ class _ManageTypesScreenState extends State<ManageTypesScreen> {
   CustomerType _selectedType = CustomerType.Comum;
   TextEditingController emailController = TextEditingController();
   TextEditingController nameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   List<Customer> customers = [];
+
+  String _passwordErrorText = '';
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +43,7 @@ class _ManageTypesScreenState extends State<ManageTypesScreen> {
             ),
           ],
         ),
+        iconTheme: const IconThemeData(color: Colors.green),
       ),
       endDrawer: const DrawerWidget(),
       body: SingleChildScrollView(
@@ -54,8 +58,7 @@ class _ManageTypesScreenState extends State<ManageTypesScreen> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon:
-                      const Icon(Icons.arrow_back), // Ícone de seta para voltar
+                  icon: const Icon(Icons.arrow_back),
                 ),
                 const SizedBox(width: 40),
                 const Text(
@@ -141,10 +144,25 @@ class _ManageTypesScreenState extends State<ManageTypesScreen> {
                     border: Border.all(color: Colors.green),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
-                  child: const TextField(
+                  child: TextField(
+                    onChanged: (value) {
+                      setState(() {
+                        _passwordErrorText = '';
+                      });
+                      if (value.length != 6) {
+                        setState(() {
+                          _passwordErrorText =
+                              'A senha deve ter exatamente 6 caracteres.';
+                        });
+                      }
+                    },
+                    controller: passwordController,
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.all(10.0),
+                      errorText: _passwordErrorText.isNotEmpty
+                          ? _passwordErrorText
+                          : null,
                     ),
                   ),
                 ),
@@ -187,25 +205,37 @@ class _ManageTypesScreenState extends State<ManageTypesScreen> {
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  if (nameController.text != null) {
+                  if (nameController.text.isNotEmpty &&
+                      emailController.text.isNotEmpty &&
+                      passwordController.text.isNotEmpty &&
+                      passwordController.text.length == 6) {
                     Customer newCustomer = Customer(
                       fullName: nameController.text,
                       email: emailController.text,
-                      customerType: _selectedType.toString(),
+                      customerType: _selectedType,
                     );
 
                     customers.add(newCustomer);
-                  }
-                  emailController.clear();
-                  nameController.clear();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => SuccessScreen(
-                        customers: customers,
+                    emailController.clear();
+                    nameController.clear();
+                    passwordController.clear();
+                    setState(() {
+                      _passwordErrorText = '';
+                    });
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SuccessScreen(
+                          customers: customers,
+                        ),
                       ),
-                    ),
-                  );
+                    );
+                  } else {
+                    setState(() {
+                      _passwordErrorText =
+                          'Preencha todos os campos corretamente.';
+                    });
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.purple,

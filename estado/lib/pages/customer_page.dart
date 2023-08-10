@@ -1,3 +1,4 @@
+import 'package:estado/widgets/drawer_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -7,8 +8,7 @@ class CustomerListScreen extends StatelessWidget {
   Future<void> _signOut(BuildContext context) async {
     try {
       await FirebaseAuth.instance.signOut();
-      Navigator.pushReplacementNamed(
-          context, '/login'); // Navegar para a tela de login
+      Navigator.pushReplacementNamed(context, '/login');
     } catch (e) {
       print('Erro ao deslogar: $e');
     }
@@ -18,53 +18,25 @@ class CustomerListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white, // Defina a cor do AppBar
+        backgroundColor: Colors.white,
         title: const Row(
           children: [
             Text(
-              'register', // Texto desejado
+              'register',
               style: TextStyle(
-                color: Colors.green, // Defina a cor verde
-                fontWeight: FontWeight.bold, // Texto em negrito
+                color: Colors.green,
+                fontWeight: FontWeight.bold,
               ),
             ),
             Icon(
               Icons.add,
-              color: Colors.purple, // Defina a cor roxa
+              color: Colors.purple,
             ),
           ],
         ),
+        iconTheme: const IconThemeData(color: Colors.green),
       ),
-      endDrawer: Drawer(
-        child: Container(
-          color: Colors.white, // Defina a cor do Drawer
-          child: ListView(
-            children: [
-              ListTile(
-                title: const Text('Gerenciar Clientes'),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/list-screen');
-                },
-              ),
-              ListTile(
-                title: const Text('Gerenciar Tipos de Clientes'),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/manage-types');
-                },
-              ),
-              ListTile(
-                title: const Text('Sair da conta'),
-                onTap: () {
-                  Navigator.pop(context);
-                  _signOut(context); // Chamar a função de deslogar
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
+      endDrawer: const DrawerWidget(),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -74,13 +46,13 @@ class CustomerListScreen extends StatelessWidget {
               children: [
                 Image.asset('assets/images/fundo1.png', width: double.infinity),
                 const Positioned(
-                  top: 300, // Posição do texto em relação à imagem
+                  top: 300,
                   child: Text(
-                    'Bora fazer parte do time.', // Texto desejado
+                    'Bora fazer parte do time.',
                     style: TextStyle(
-                      color: Colors.white, // Cor do texto
-                      fontSize: 18, // Tamanho do texto
-                      fontWeight: FontWeight.bold, // Texto em negrito
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
@@ -125,7 +97,7 @@ class CustomerListScreen extends StatelessWidget {
                   top: 120,
                   left: 60,
                   child: Text(
-                    'agora mesmo.', // Novo texto na imagem 2
+                    'agora mesmo.',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -173,7 +145,7 @@ class CustomerListScreen extends StatelessWidget {
                   top: 80,
                   left: 250,
                   child: Text(
-                    'agora mesmo.', // Novo texto na imagem 2
+                    'agora mesmo.',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,

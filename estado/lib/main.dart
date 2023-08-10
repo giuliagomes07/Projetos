@@ -1,7 +1,8 @@
 import 'package:estado/models/custom_model.dart';
-import 'package:estado/pages/customer_widget.dart';
-import 'package:estado/pages/list_widget.dart';
-import 'package:estado/pages/manege_widget.dart';
+import 'package:estado/pages/customer_page.dart';
+import 'package:estado/pages/list_page.dart';
+import 'package:estado/pages/manege_page.dart';
+import 'package:estado/util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,7 +16,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => Customer(fullName: '', email: '', customerType: ''),
+      create: (context) =>
+          Customer(fullName: '', email: '', customerType: CustomerType.Comum),
       child: MaterialApp(
         title: 'Cadastro de Clientes',
         debugShowCheckedModeBanner: false,
