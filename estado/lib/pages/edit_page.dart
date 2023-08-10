@@ -1,24 +1,28 @@
 import 'package:estado/models/custom_model.dart';
 import 'package:estado/util/util.dart';
 import 'package:estado/widgets/drawer_widget.dart';
-import 'package:estado/widgets/success_widgets.dart';
 import 'package:flutter/material.dart';
 
-class ManageTypesScreen extends StatefulWidget {
-  final List<Customer> customers;
-
-  const ManageTypesScreen({Key? key, required this.customers})
-      : super(key: key);
+class EditPage extends StatefulWidget {
+  final String email;
+  final String name;
+  const EditPage({super.key, required this.email, required this.name});
 
   @override
-  _ManageTypesScreenState createState() => _ManageTypesScreenState();
+  State<EditPage> createState() => _EditPageState();
 }
 
-class _ManageTypesScreenState extends State<ManageTypesScreen> {
-  CustomerType _selectedType = CustomerType.Comum;
-  TextEditingController emailController = TextEditingController();
-  TextEditingController nameController = TextEditingController();
-  List<Customer> customers = [];
+class _EditPageState extends State<EditPage> {
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _nameController = TextEditingController();
+
+  @override
+  void initState() {
+    _emailController.text = widget.email;
+    _nameController.text = widget.name;
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,12 +58,11 @@ class _ManageTypesScreenState extends State<ManageTypesScreen> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon:
-                      const Icon(Icons.arrow_back), // Ícone de seta para voltar
+                  icon: const Icon(Icons.arrow_back),
                 ),
                 const SizedBox(width: 40),
                 const Text(
-                  'Cadastro de Clientes',
+                  'Editar Clientes',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -98,7 +101,7 @@ class _ManageTypesScreenState extends State<ManageTypesScreen> {
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   child: TextField(
-                    controller: nameController,
+                    controller: _nameController,
                     decoration: const InputDecoration(
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.all(10.0),
@@ -120,7 +123,7 @@ class _ManageTypesScreenState extends State<ManageTypesScreen> {
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   child: TextField(
-                    controller: emailController,
+                    controller: _emailController,
                     decoration: const InputDecoration(
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.all(10.0),
@@ -187,17 +190,17 @@ class _ManageTypesScreenState extends State<ManageTypesScreen> {
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  if (nameController.text != null) {
+                  if (_nameController.text != null) {
                     Customer newCustomer = Customer(
-                      fullName: nameController.text,
-                      email: emailController.text,
+                      fullName: _nameController.text,
+                      email: _emailController.text,
                       customerType: _selectedType.toString(),
                     );
 
                     customers.add(newCustomer);
                   }
-                  emailController.clear();
-                  nameController.clear();
+                  _emailController.clear();
+                  _nameController.clear();
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -215,7 +218,7 @@ class _ManageTypesScreenState extends State<ManageTypesScreen> {
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
-                child: const Text('Cadastrar'),
+                child: const Text('Editar'),
               ),
             ),
           ],

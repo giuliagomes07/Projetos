@@ -1,5 +1,5 @@
 import 'package:estado/models/custom_model.dart';
-import 'package:estado/widgets/list_widget.dart';
+import 'package:estado/pages/list_widget.dart';
 import 'package:flutter/material.dart';
 
 class SuccessScreen extends StatelessWidget {
